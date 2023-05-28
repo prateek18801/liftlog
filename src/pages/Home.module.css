@@ -1,0 +1,27 @@
+.page {
+    height: 100vh;
+    padding: 2rem 1rem;
+    background-color: var(--secondary);
+}
+
+.schedule {
+    padding: 1rem;
+    margin-bottom: 2rem;
+    border-radius: 5px;
+    background-color: var(--highlight);
+}
+
+.schedule button {
+    padding: 0.5rem;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    background-color: var(--secondary);
+    color: var(--highlight);
+}
+
+.dflex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
