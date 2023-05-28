@@ -1,0 +1,48 @@
+.card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0.5rem;
+}
+
+.part {
+    color: var(--primary);
+}
+
+.duration {
+    font-size: 11px;
+    color: var(--highlight);
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.wrapper button {
+    height: 1.2rem;
+    width: 1.2rem;
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    background-color: var(--highlight);
+    color: var(--secondary);
+}
+
+.wrapper input[type=number] {
+    border: 1px solid var(--highlight);
+    border-radius: 2px;
+    outline: none;
+    background: none;
+    color: var(--primary);
+    width: 2rem;
+    margin: 0 0.2rem;
+    text-align: center;
+}
+
+.wrapper input[type=checkbox] {
+    height: 1.2rem;
+    width: 1.2rem;
+    accent-color: var(--highlight);
+    margin: 0 0.5rem 0 0.7rem;
+}
