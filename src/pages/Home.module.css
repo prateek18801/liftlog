@@ -7,20 +7,20 @@
 .schedule {
     padding: 1rem;
     margin-bottom: 3rem;
-    border-radius: 5px;
+    border-radius: 10px;
     font-weight: 500;
     background-color: var(--highlight);
 }
 
 .schedule > div {
-    font-size: 20px;
+    font-size: 1.5rem;
 }
 
 .schedule button {
-    padding: 0.5rem;
+    padding: 0.7rem;
     border: none;
     outline: none;
-    border-radius: 3px;
+    border-radius: 5px;
     background-color: var(--secondary);
     color: var(--highlight);
 }
@@ -49,8 +49,8 @@
     outline: none;
     font-size: 1.2rem;
     font-weight: 500;
-    border-radius: 3px;
+    border-radius: 5px;
     background-color: var(--highlight);
     color: var(--secondary);
-    padding: 0.5rem 1rem;
+    padding: 0.7rem 1rem;
 }
