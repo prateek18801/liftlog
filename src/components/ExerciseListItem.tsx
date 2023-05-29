@@ -39,7 +39,7 @@ const ExerciseListItem = ({ id, part, exercises, timestamp, exercisesDoneToday, 
         <div className={styles.card}>
 
             <div className={styles.wrapper}>
-                <div style={{ color: '#FFFFFF' }}>#</div>
+                <div><span className='material-symbols-outlined'>drag_indicator</span></div>
                 <input type='checkbox' name={part} id={part} onClick={updateExerciseTimestamp} defaultChecked={exercisesDoneToday.includes(id)} />
                 <div className={styles.part}>{part[0].toUpperCase() + part.substring(1)}</div>
             </div>
