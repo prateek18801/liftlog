@@ -25,3 +25,19 @@
     align-items: center;
     justify-content: space-between;
 }
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5rem;
+}
+
+.container button {
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    background-color: var(--highlight);
+    color: var(--secondary);
+    padding: 0.5rem 1rem;
+}
