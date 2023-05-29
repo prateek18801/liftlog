@@ -3,8 +3,8 @@
     grid-template-columns: 4fr auto 2fr;
     column-gap: 10px;
     align-items: center;
-    padding: 0 0.5rem;
-    margin-bottom: 2rem;
+    padding: 0 0.5rem 0 0;
+    margin-bottom: 2.2rem;
 }
 
 .part {
@@ -22,9 +22,14 @@
     align-items: center;
 }
 
+.wrapper > div > span {
+    color: #757575;
+    display: block;
+}
+
 .wrapper button {
-    height: 1.2rem;
-    width: 1.2rem;
+    height: 1.5rem;
+    width: 1.5rem;
     border: none;
     outline: none;
     border-radius: 2px;
@@ -38,15 +43,15 @@
     outline: none;
     background: none;
     color: var(--primary);
-    width: 1.2rem;
-    height: 1.2rem;
+    width: 1.5rem;
+    height: 1.5rem;
     margin: 0 0.2rem;
     text-align: center;
 }
 
 .wrapper input[type=checkbox] {
-    height: 1.2rem;
-    width: 1.2rem;
+    height: 1.5rem;
+    width: 1.5rem;
     accent-color: var(--highlight);
     margin: 0 0.5rem 0 0.7rem;
 }

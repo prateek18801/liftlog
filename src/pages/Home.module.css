@@ -6,8 +6,9 @@
 
 .schedule {
     padding: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
     border-radius: 5px;
+    font-weight: 500;
     background-color: var(--highlight);
 }
 
@@ -46,7 +47,7 @@
 .container button {
     border: none;
     outline: none;
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 500;
     border-radius: 3px;
     background-color: var(--highlight);
