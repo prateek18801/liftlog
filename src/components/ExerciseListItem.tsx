@@ -51,7 +51,7 @@ const ExerciseListItem = ({ id, part, exercises, timestamp, exercisesDoneToday, 
             </div>
 
             <div className={styles.duration}>
-                {new Date(timestamp).toString().split(' ')[2]} {new Date(timestamp).toString().split(' ')[1]}, {Math.floor((Date.now() - timestamp) / (1000 * 60 * 60 * 24))} Days
+                {new Date(timestamp).toString().split(' ')[2]} {new Date(timestamp).toString().split(' ')[1]}, {Math.round((Date.now() - timestamp) / (1000 * 60 * 60 * 24))} Days
             </div>
 
         </div>
