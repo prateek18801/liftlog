@@ -5,7 +5,7 @@ import styles from './Home.module.css';
 
 const Home = ({ setPage }: { setPage: Dispatch<SetStateAction<number>> }) => {
 
-    const [exerciseSchedule, setExerciseSchedule] = useLocalStorage('SCHEDULE', [
+    const [exerciseSchedule, setExerciseSchedule] = useLocalStorage<Array<{ part: string, exercises: number, timestamp: number, id: number }>>('SCHEDULE', [
         { part: 'chest', exercises: 4, timestamp: 1682899200000, id: 0 },
         { part: 'biceps', exercises: 3, timestamp: 1682899200000, id: 1 },
         { part: 'forearms', exercises: 2, timestamp: 1682899200000, id: 2 },
@@ -15,12 +15,14 @@ const Home = ({ setPage }: { setPage: Dispatch<SetStateAction<number>> }) => {
         { part: 'legs', exercises: 4, timestamp: 1682899200000, id: 6 }
     ]);
 
-    const initialzeExercisesDoneToday: Array<{id: number, exercises: number}> = [];
+    const [liftLogs, setLiftLogs] = useLocalStorage<Array<{ id: number, exercises: number }>>('LIFTLOGS', []);
+
+    const initialzeExercisesDoneToday: Array<{ id: number, exercises: number }> = [];
     exerciseSchedule.forEach(listItem => {
-        if (Math.floor((Date.now() - listItem.timestamp) / (1000 * 60 * 60)) < 12) initialzeExercisesDoneToday.push({id: listItem.id, exercises: listItem.exercises});
+        if (Math.floor((Date.now() - listItem.timestamp) / (1000 * 60 * 60)) < 12) initialzeExercisesDoneToday.push({ id: listItem.id, exercises: listItem.exercises });
     });
 
-    const [exercisesDoneToday, setExercisesDoneToday] = useState<Array<{id: number, exercises: number}>>(initialzeExercisesDoneToday);
+    const [exercisesDoneToday, setExercisesDoneToday] = useState<Array<{ id: number, exercises: number }>>(initialzeExercisesDoneToday);
 
     const updateTimestamps = () => {
         const updatedExerciseSchdeule = exerciseSchedule.map(listItem => {
@@ -28,6 +30,9 @@ const Home = ({ setPage }: { setPage: Dispatch<SetStateAction<number>> }) => {
             return listItem;
         }).sort((a, b) => a.timestamp - b.timestamp || a.id - b.id);
         setExerciseSchedule(updatedExerciseSchdeule);
+
+        const updatedLogs: Array<{ id: number, exercises: number }> = [...liftLogs, ...exercisesDoneToday];
+        setLiftLogs(updatedLogs);
     }
 
     return (
