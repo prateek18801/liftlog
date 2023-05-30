@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import styles from './ExerciseListItem.module.css';
 
 type ListItem = {
@@ -9,29 +9,25 @@ type ListItem = {
 };
 
 type ExerciseListItemProps = {
-    exercisesDoneToday: number[],
-    setExercisesDoneToday: Dispatch<SetStateAction<number[]>>
+    exercisesDoneToday: Array<{ id: number, exercises: number }>,
+    setExercisesDoneToday: Dispatch<SetStateAction<Array<{ id: number, exercises: number }>>>
 } & ListItem;
 
 const ExerciseListItem = ({ id, part, exercises, timestamp, exercisesDoneToday, setExercisesDoneToday }: ExerciseListItemProps) => {
 
+    const [exerciseCount, setExerciseCount] = useState<number>(exercises);
+
     const incrementExerciseCount = () => {
-        // setExerciseDetail(prev => {
-        //     const updatedExerciseDetail = prev.map(obj => {
-        //         if (obj.id === id) return { ...obj, timestamp: Date.now() };
-        //         return obj;
-        //     });
-        //     return updatedExerciseDetail;
-        // });
+        setExerciseCount(prev => prev + 1);
     }
 
     const decrementExerciseCount = () => {
-
+        setExerciseCount(prev => prev - 1);
     }
 
     const updateExerciseTimestamp = () => {
         setExercisesDoneToday(prev => {
-            return prev.includes(id) ? prev.filter(el => el !== id) : [...prev, id];
+            return prev.find(obj => obj.id === id) ? prev.filter(el => el.id !== id) : [...prev, { id, exercises: exerciseCount }];
         });
     }
 
@@ -40,13 +36,19 @@ const ExerciseListItem = ({ id, part, exercises, timestamp, exercisesDoneToday, 
 
             <div className={styles.wrapper}>
                 <div><span className='material-symbols-outlined'>drag_indicator</span></div>
-                <input type='checkbox' name={part} id={part} onClick={updateExerciseTimestamp} defaultChecked={exercisesDoneToday.includes(id)} />
+                <input
+                    type='checkbox'
+                    id={part}
+                    name={part}
+                    onClick={updateExerciseTimestamp}
+                    defaultChecked={exercisesDoneToday.find(obj => obj.id === id) ? true : false}
+                />
                 <div className={styles.part}>{part[0].toUpperCase() + part.substring(1)}</div>
             </div>
 
             <div className={styles.wrapper}>
                 <button onClick={decrementExerciseCount}>-</button>
-                <input type='number' defaultValue={exercises} />
+                <input type='number' value={exerciseCount} onChange={e => setExerciseCount(+e.target.value)} />
                 <button onClick={incrementExerciseCount}>+</button>
             </div>
 
