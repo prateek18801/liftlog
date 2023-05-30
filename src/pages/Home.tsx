@@ -1,17 +1,17 @@
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import ExerciseListItem from '../components/ExerciseListItem';
 import useLocalStorage from '../hooks/useLocalStorage';
 import styles from './Home.module.css';
 
-const Home: React.FC = () => {
+const Home = ({ setPage }: { setPage: Dispatch<SetStateAction<number>> }) => {
 
     const [exerciseSchedule, setExerciseSchedule] = useLocalStorage('SCHEDULE', [
         { part: 'chest', exercises: 4, timestamp: 1682899200000, id: 0 },
-        { part: 'biceps', exercises: 4, timestamp: 1682899200000, id: 1 },
-        { part: 'forearms', exercises: 4, timestamp: 1682899200000, id: 2 },
-        { part: 'triceps', exercises: 4, timestamp: 1682899200000, id: 3 },
-        { part: 'shoulders', exercises: 4, timestamp: 1682899200000, id: 4 },
-        { part: 'back', exercises: 4, timestamp: 1682899200000, id: 5 },
+        { part: 'biceps', exercises: 3, timestamp: 1682899200000, id: 1 },
+        { part: 'forearms', exercises: 2, timestamp: 1682899200000, id: 2 },
+        { part: 'triceps', exercises: 3, timestamp: 1682899200000, id: 3 },
+        { part: 'back', exercises: 4, timestamp: 1682899200000, id: 4 },
+        { part: 'shoulders', exercises: 4, timestamp: 1682899200000, id: 5 },
         { part: 'legs', exercises: 4, timestamp: 1682899200000, id: 6 }
     ]);
 
@@ -19,14 +19,14 @@ const Home: React.FC = () => {
     exerciseSchedule.forEach(listItem => {
         if (Math.floor((Date.now() - listItem.timestamp) / (1000 * 60 * 60)) < 12) initialzeExercisesDoneToday.push(listItem.id);
     });
-    
+
     const [exercisesDoneToday, setExercisesDoneToday] = useState<number[]>(initialzeExercisesDoneToday);
 
     const updateTimestamps = () => {
         const updatedExerciseSchdeule = exerciseSchedule.map(listItem => {
             if (exercisesDoneToday.includes(listItem.id)) return { ...listItem, timestamp: Date.now() };
             return listItem;
-        });
+        }).sort((a, b) => a.timestamp - b.timestamp || a.id - b.id);
         setExerciseSchedule(updatedExerciseSchdeule);
     }
 
@@ -55,6 +55,10 @@ const Home: React.FC = () => {
 
             <div className={styles.container}>
                 <button onClick={updateTimestamps}>Done</button>
+            </div>
+
+            <div >
+                <button onClick={() => { setPage(1) }}>Stats</button>
             </div>
 
         </div>
