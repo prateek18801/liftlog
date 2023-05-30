@@ -15,16 +15,16 @@ const Home = ({ setPage }: { setPage: Dispatch<SetStateAction<number>> }) => {
         { part: 'legs', exercises: 4, timestamp: 1682899200000, id: 6 }
     ]);
 
-    const initialzeExercisesDoneToday: number[] = [];
+    const initialzeExercisesDoneToday: Array<{id: number, exercises: number}> = [];
     exerciseSchedule.forEach(listItem => {
-        if (Math.floor((Date.now() - listItem.timestamp) / (1000 * 60 * 60)) < 12) initialzeExercisesDoneToday.push(listItem.id);
+        if (Math.floor((Date.now() - listItem.timestamp) / (1000 * 60 * 60)) < 12) initialzeExercisesDoneToday.push({id: listItem.id, exercises: listItem.exercises});
     });
 
-    const [exercisesDoneToday, setExercisesDoneToday] = useState<number[]>(initialzeExercisesDoneToday);
+    const [exercisesDoneToday, setExercisesDoneToday] = useState<Array<{id: number, exercises: number}>>(initialzeExercisesDoneToday);
 
     const updateTimestamps = () => {
         const updatedExerciseSchdeule = exerciseSchedule.map(listItem => {
-            if (exercisesDoneToday.includes(listItem.id)) return { ...listItem, timestamp: Date.now() };
+            if (exercisesDoneToday.find(obj => obj.id === listItem.id)) return { ...listItem, timestamp: Date.now() };
             return listItem;
         }).sort((a, b) => a.timestamp - b.timestamp || a.id - b.id);
         setExerciseSchedule(updatedExerciseSchdeule);
